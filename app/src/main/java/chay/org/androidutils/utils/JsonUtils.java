@@ -1,11 +1,15 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import com.google.gson.Gson;
 
 /**
- * Created by Administrator on 2018/4/24 0024.
+ * Author:Chay
+ * Time:2018/8/23 0023
  * <p>
  * JsonUtils,便于解析json数据和转成json数据格式的String
+ * PS:对于解析数据量比较小的，推荐使用阿里的fastjson，解析效率高；
+ * 数据量比较大的，推荐使用gson。本工具类针对数据量大的，如需更换，
+ * 只需gson包替换即可。
  * </p>
  */
 

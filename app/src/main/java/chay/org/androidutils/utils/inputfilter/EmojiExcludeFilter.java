@@ -1,4 +1,4 @@
-package chay.org.androidutils.utils;
+package chay.org.androidutils.utils.inputfilter;
 
 import android.text.InputFilter;
 import android.text.Spanned;

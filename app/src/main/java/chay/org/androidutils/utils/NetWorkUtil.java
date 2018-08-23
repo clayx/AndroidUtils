@@ -1,10 +1,11 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 
 /**
- * Created by Administrator on 2018/4/17 0017.
+ * Author:Chay
+ * Time:2018/8/23 0023
  * <p>
  * 网络检查工具类
  * </p>

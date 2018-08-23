@@ -1,4 +1,4 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -14,7 +14,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * Created by Administrator on 2018/4/18 0018.
+ * Author:Chay
+ * Time:2018/8/23 0023
  * <p>
  * 文件相关工具类
  * </p>
@@ -23,7 +24,7 @@ import java.io.IOException;
 public class FileUtil {
 
     /**
-     * 保存文件
+     * 保存图片文件
      *
      * @param bm
      * @throws IOException
@@ -46,7 +47,7 @@ public class FileUtil {
      * @throws IOException
      */
     public static void saveFile(Bitmap bm, String dir, String name) throws IOException {
-        AnyHelper.makeFilePath(dir, name);
+        makeFilePath(dir, name);
         File file = new File(dir + name);
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
         bm.compress(Bitmap.CompressFormat.PNG, 100, bos);
@@ -110,44 +111,17 @@ public class FileUtil {
     /**
      * 将友盟获取到的deviceToken写入txt，方便测试
      *
-     * @param str
+     * @param str      需要写入的字符串
+     * @param fileName 文件名称，一般为（xxx.txt），方便自己查看输出数据，配置信息或者错误信息
      */
-    public static void getDeviceTokenToTxt(String str) {
+    public static void getMessageToTxt(String str, String fileName) {
 
         String filePath = null;
         boolean hasSDCard = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
         if (hasSDCard) {
-            filePath = Environment.getExternalStorageDirectory().toString() + File.separator + "boseraToken.txt";
+            filePath = Environment.getExternalStorageDirectory().toString() + File.separator + fileName;
         } else
-            filePath = Environment.getDownloadCacheDirectory().toString() + File.separator + "boseraToken.txt";
-        try {
-            File file = new File(filePath);
-            if (!file.exists()) {
-                File dir = new File(file.getParent());
-                dir.mkdirs();
-                file.createNewFile();
-            }
-            FileOutputStream outStream = new FileOutputStream(file);
-            outStream.write(str.getBytes());
-            outStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 将X5的Log写入txt，方便查看
-     *
-     * @param str
-     */
-    public static void getX5LogForText(String str, String filename) {
-
-        String filePath = null;
-        boolean hasSDCard = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-        if (hasSDCard) {
-            filePath = Environment.getExternalStorageDirectory().toString() + File.separator + "boseraWeb" + File.separator + filename;
-        } else
-            filePath = Environment.getDownloadCacheDirectory().toString() + File.separator + "boseraWeb" + File.separator + filename;
+            filePath = Environment.getDownloadCacheDirectory().toString() + File.separator + fileName;
         try {
             File file = new File(filePath);
             if (!file.exists()) {

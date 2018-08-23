@@ -1,10 +1,11 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import android.content.Context;
 import android.widget.Toast;
 
 /**
- * Created by Administrator on 2018/3/8 0008.
+ * Author:Chay
+ * Time:2018/8/23 0023
  * <p>
  * ToastUtils 吐司工具类，全局只有一个Toast，不用计算每次吐司之间的时间，
  * 避免连续显示Toast时不能取消上一次的情况

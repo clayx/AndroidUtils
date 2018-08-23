@@ -1,4 +1,4 @@
-package chay.org.androidutils;
+package chay.org.androidutils.utils;
 
 import android.util.Log;
 
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 
-import chay.org.androidutils.utils.Preconditions;
+import chay.org.androidutils.BuildConfig;
 
 /**
  * Author:Chay

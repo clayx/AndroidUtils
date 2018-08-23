@@ -1,4 +1,4 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2018/4/8 0008.
+ * Author:Chay
+ * Time:2018/8/23 0023
  * <p>
- * NULL检查工具类
+ * NULL校检工具类
  * </p>
- */
+ **/
 
 public class Preconditions {
 
@@ -87,18 +88,42 @@ public class Preconditions {
         return TextUtils.isEmpty(string);
     }
 
+    /**
+     * 检查List
+     *
+     * @param list
+     * @return
+     */
     public static boolean isNullOrEmpty(@Nullable List list) {
         return list == null || list.size() == 0;
     }
 
+    /**
+     * 检查Map
+     *
+     * @param map
+     * @return
+     */
     public static boolean isNullOrEmpty(@Nullable Map map) {
         return map == null || map.size() == 0;
     }
 
+    /**
+     * 检查对象数组
+     *
+     * @param objs
+     * @return
+     */
     public static boolean isNullOrEmpty(@Nullable Object[] objs) {
         return objs == null || objs.length == 0;
     }
 
+    /**
+     * 检查对象
+     *
+     * @param obj
+     * @return
+     */
     public static boolean isNullOrEmpty(@Nullable Object obj) {
         return obj == null;
     }

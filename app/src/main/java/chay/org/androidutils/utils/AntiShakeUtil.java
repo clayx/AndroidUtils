@@ -1,8 +1,8 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 /**
  * Author:Chay
- * Time:2018/8/6 0006
+ * Time:2018/8/23 0023
  * <p>
  * 防抖判断工具类
  * </p>
@@ -24,6 +24,7 @@ public class AntiShakeUtil {
     /**
      * 是否快速点击按钮操作，
      * 在写点击事件的时候，最好直接判断一下（可在onClick方法的最开始判断即可）
+     * PS:此方法也可作为借口请求的防抖操作，防止错误操作导致接口请求多次
      *
      * @param shakeTime 防抖时间
      * @return

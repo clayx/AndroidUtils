@@ -1,4 +1,4 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
@@ -9,7 +9,8 @@ import android.view.Display;
 import android.view.WindowManager;
 
 /**
- * Created by Administrator on 2018/4/17 0017.
+ * Author:Chay
+ * Time:2018/8/23 0023
  * <p>
  * 屏幕相关工具类
  * </p>

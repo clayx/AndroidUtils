@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
 ext.deps = [:]
 def version = [:]
 version.app_support = "28.0.0-rc01"
 version.constraint = "1.1.2"
+version.gson = "2.8.5"
 
-def deps =[:]
+def deps = [:]
 
 def support = [:]
 support.appcompat = "com.android.support:appcompat-v7:$version.app_support"
@@ -27,6 +32,7 @@ deps.support = support
 
 def base = [:]
 base.constraint = "com.android.support.constraint:constraint-layout:$version.constraint"
+base.gson = "com.google.code.gson:gson:$version.gson"
 deps.base = base
 ext.deps = deps
 

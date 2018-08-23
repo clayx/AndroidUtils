@@ -1,4 +1,4 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -7,7 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by Administrator on 2018/4/17 0017.
+ * Author:Chay
+ * Time:2018/8/23 0023
  * <p>
  * 日期转换工具类
  * </p>
@@ -115,8 +116,8 @@ public class DateUtils {
     public static String formatDate(String oldDate, String oldFormate, String formate) {
         String sDate = "";
         try {
-            if (!AnyHelper.isNoNull(oldDate)) {
-                return oldDate;
+            if (Preconditions.isNullOrEmpty(oldDate)) {
+                return "";
             }
             SimpleDateFormat df = new SimpleDateFormat(oldFormate);
             Date date = null;
@@ -218,8 +219,8 @@ public class DateUtils {
     /**
      * 获取前几天的日期
      *
-     * @param step 当前天差值，如果为正则向后，否则向前
-     * @param patten    格式
+     * @param step   当前天差值，如果为正则向后，否则向前
+     * @param patten 格式
      * @return 日期
      */
     public static String getStepDay(int step, String patten) {

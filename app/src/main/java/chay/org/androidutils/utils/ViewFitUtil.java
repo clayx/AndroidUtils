@@ -1,4 +1,4 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import android.app.Activity;
 import android.app.Application;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 /**
  * Author:Chay
- * Time:2018/8/6 0006
+ * Time:2018/8/23 0006
  * <p>
  * View相关适配工具类
  * </p>

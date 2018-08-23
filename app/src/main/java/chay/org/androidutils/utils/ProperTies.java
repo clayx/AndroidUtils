@@ -1,4 +1,4 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import android.content.Context;
 
@@ -6,7 +6,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Created by Administrator on 2018/3/28 0028.
+ * Author:Chay
+ * Time:2018/8/23 0023
  * <p>
  * 获取配置文件工具，在assets文件夹下创建，config文件，然后在编写相关配置
  * </p>

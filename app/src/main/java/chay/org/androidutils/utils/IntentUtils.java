@@ -1,4 +1,4 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -19,10 +19,9 @@ import android.support.v4.app.FragmentActivity;
 
 public class IntentUtils {
 
-    private static final String TAG = "IntentUtils";
-
     /**
      * Activity隐式跳转要通过resolver检查，防止ActivityNotFoundException
+     * PS:安全检查需要判断
      *
      * @param context context
      * @param intent  intent
@@ -31,14 +30,15 @@ public class IntentUtils {
         if (context.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
             context.startActivity(intent);
         } else {
-            AnyHelper.logInfo(TAG, "activity not found");
+            L.cLog().e("activity not found");
         }
     }
 
     /**
      * 跳转到Activity列
+     *
      * @param context context
-     * @param intent intent数组
+     * @param intent  intent数组
      */
     public static void startActivityList(Context context, Intent[] intent) {
         if (context == null) return;
@@ -108,7 +108,7 @@ public class IntentUtils {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             IntentUtils.startAction(context, intent);
         } catch (Exception e) {
-            if (AnyHelper.isWebUrl(defaultLoadUrl)) {
+            if (PatternUtil.isUrl(defaultLoadUrl)) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 Uri content_url = Uri.parse(defaultLoadUrl);

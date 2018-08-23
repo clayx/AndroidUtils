@@ -1,4 +1,4 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -15,7 +15,8 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 
 /**
- * Created by Administrator on 2018/3/28 0028.
+ * Author:Chay
+ * Time:2018/8/23 0023
  *
  * @Des: 签名验证工具，验证app包签名和获取的keystore中的签名是否一致，
  * PS：获取keystore中签名，打开Terminal,cd到相关的keystore(jks文件)的目录，执行
@@ -23,8 +24,6 @@ import java.security.cert.X509Certificate;
  */
 
 public class SignCheckUtils {
-
-    private final String TAG = "SignCheckUtils";
 
     private static SignCheckUtils instance;
 

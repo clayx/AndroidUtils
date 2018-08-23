@@ -1,4 +1,4 @@
-package com.example.administrator.androidcodingutils.util;
+package chay.org.androidutils.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -18,7 +18,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
+ * Author:Chay
+ * Time:2018/8/23 0023
+ * <p>
  * 图形/图像 操作，读取,缩放，变换
+ * </p>
  */
 public class BitmapUtil {
 
@@ -67,16 +71,18 @@ public class BitmapUtil {
 
     /**
      * 压缩图片（质量限制）
+     *
      * @param srcImg
      * @param quality
      * @return
      */
-    public static Bitmap compressImage4Quality(String srcImg,int quality){
-        return compressImage(srcImg,0,quality);
+    public static Bitmap compressImage4Quality(String srcImg, int quality) {
+        return compressImage(srcImg, 0, quality);
     }
 
     /**
      * 压缩图片（大小限制）
+     *
      * @param srcImg
      * @param bitmapSize
      * @return

@@ -1,4 +1,4 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -19,12 +19,12 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 /**
- * Java utils 实现的Zip工具
- * @author once
- *
- * 更新：Zip文件目录遍历风险
- * 如果该ZIP文件被劫持插入恶意代码，则禁止ZIP目录遍历
- * dengjiyun 2018-08-14
+ * Author:Chay
+ * Time:2018/8/23 0023
+ * <p>
+ * Zip文件目录遍历风险
+ * PS:如果该ZIP文件被劫持插入恶意代码，则禁止ZIP目录遍历
+ * </p>
  */
 public class ZipUtils {
     private static final int BUFF_SIZE = 1024 * 1024; // 1M Byte
@@ -33,7 +33,7 @@ public class ZipUtils {
      * 批量压缩文件（夹）
      *
      * @param resFileList 要压缩的文件（夹）列表
-     * @param zipFile 生成的压缩文件
+     * @param zipFile     生成的压缩文件
      * @throws IOException 当压缩过程出错时抛出
      */
     public static void zipFiles(Collection<File> resFileList, File zipFile) throws IOException {
@@ -49,8 +49,8 @@ public class ZipUtils {
      * 批量压缩文件（夹）
      *
      * @param resFileList 要压缩的文件（夹）列表
-     * @param zipFile 生成的压缩文件
-     * @param comment 压缩文件的注释
+     * @param zipFile     生成的压缩文件
+     * @param comment     压缩文件的注释
      * @throws IOException 当压缩过程出错时抛出
      */
     public static void zipFiles(Collection<File> resFileList, File zipFile, String comment)
@@ -67,7 +67,7 @@ public class ZipUtils {
     /**
      * 解压缩一个文件
      *
-     * @param zipFile 压缩文件
+     * @param zipFile    压缩文件
      * @param folderPath 解压缩的目标目录
      * @throws IOException 当解压缩过程出错时抛出
      */
@@ -77,8 +77,8 @@ public class ZipUtils {
             desDir.mkdirs();
         }
         ZipFile zf = new ZipFile(zipFile);
-        for (Enumeration<?> entries = zf.entries(); entries.hasMoreElements();) {
-            ZipEntry entry = ((ZipEntry)entries.nextElement());
+        for (Enumeration<?> entries = zf.entries(); entries.hasMoreElements(); ) {
+            ZipEntry entry = ((ZipEntry) entries.nextElement());
 
             if (entry.getName().contains("../")) {
                 throw new Exception("发现不安全的 zip 文件解压路径!");
@@ -109,14 +109,14 @@ public class ZipUtils {
     /**
      * 解压文件名包含传入文字的文件
      *
-     * @param zipFile 压缩文件
-     * @param folderPath 目标文件夹
+     * @param zipFile      压缩文件
+     * @param folderPath   目标文件夹
      * @param nameContains 传入的文件匹配名
      * @throws ZipException 压缩格式有误时抛出
-     * @throws IOException IO错误时抛出
+     * @throws IOException  IO错误时抛出
      */
     public static ArrayList<File> upZipSelectedFile(File zipFile, String folderPath,
-                                                    String nameContains) throws ZipException, IOException ,Exception{
+                                                    String nameContains) throws ZipException, IOException, Exception {
         ArrayList<File> fileList = new ArrayList<File>();
 
         File desDir = new File(folderPath);
@@ -125,8 +125,8 @@ public class ZipUtils {
         }
 
         ZipFile zf = new ZipFile(zipFile);
-        for (Enumeration<?> entries = zf.entries(); entries.hasMoreElements();) {
-            ZipEntry entry = ((ZipEntry)entries.nextElement());
+        for (Enumeration<?> entries = zf.entries(); entries.hasMoreElements(); ) {
+            ZipEntry entry = ((ZipEntry) entries.nextElement());
 
             if (entry.getName().contains("../")) {
                 throw new Exception("发现不安全的 zip 文件解压路径!");
@@ -166,13 +166,13 @@ public class ZipUtils {
      * @param zipFile 压缩文件
      * @return 压缩文件内文件名称
      * @throws ZipException 压缩文件格式有误时抛出
-     * @throws IOException 当解压缩过程出错时抛出
+     * @throws IOException  当解压缩过程出错时抛出
      */
-    public static ArrayList<String> getEntriesNames(File zipFile) throws ZipException, IOException ,Exception{
+    public static ArrayList<String> getEntriesNames(File zipFile) throws ZipException, IOException, Exception {
         ArrayList<String> entryNames = new ArrayList<String>();
         Enumeration<?> entries = getEntriesEnumeration(zipFile);
         while (entries.hasMoreElements()) {
-            ZipEntry entry = ((ZipEntry)entries.nextElement());
+            ZipEntry entry = ((ZipEntry) entries.nextElement());
             if (entry.getName().contains("../")) {
                 throw new Exception("发现不安全的 zip 文件解压路径!");
             }
@@ -187,7 +187,7 @@ public class ZipUtils {
      * @param zipFile 压缩文件
      * @return 返回一个压缩文件列表
      * @throws ZipException 压缩文件格式有误时抛出
-     * @throws IOException IO操作有误时抛出
+     * @throws IOException  IO操作有误时抛出
      */
     public static Enumeration<?> getEntriesEnumeration(File zipFile) throws ZipException,
             IOException {
@@ -221,11 +221,11 @@ public class ZipUtils {
     /**
      * 压缩文件
      *
-     * @param resFile 需要压缩的文件（夹）
-     * @param zipout 压缩的目的文件
+     * @param resFile  需要压缩的文件（夹）
+     * @param zipout   压缩的目的文件
      * @param rootpath 压缩的文件路径
      * @throws FileNotFoundException 找不到文件时抛出
-     * @throws IOException 当压缩过程出错时抛出
+     * @throws IOException           当压缩过程出错时抛出
      */
     private static void zipFile(File resFile, ZipOutputStream zipout, String rootpath)
             throws FileNotFoundException, IOException {

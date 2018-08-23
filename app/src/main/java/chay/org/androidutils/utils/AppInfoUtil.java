@@ -1,4 +1,4 @@
-package com.boshijj.utils;
+package chay.org.androidutils.utils;
 
 import android.Manifest;
 import android.content.Context;
@@ -9,12 +9,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-
-import com.boshijj.base.C;
-import com.boshijj.network.NetUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -34,19 +32,24 @@ import java.util.Enumeration;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/4/17 0017.
+ * Author:Chay
+ * Time:2018/8/23 0023
  * <p>
  * App信息工具类
  * </p>
- */
-
+ **/
 public class AppInfoUtil {
 
     //系统版本号
     public static String osVersion;
 
+    /**
+     * 获取手机系统版本号
+     *
+     * @return
+     */
     public static String getOsVersion() {
-        if (AnyHelper.isNoNull(osVersion)) {
+        if (!Preconditions.isNullOrEmpty(osVersion)) {
             return osVersion;
         }
         osVersion = android.os.Build.VERSION.RELEASE;
@@ -56,15 +59,25 @@ public class AppInfoUtil {
     //手机型号
     public static String mobileType = "";
 
+    /**
+     * 获取手机的手机型号
+     *
+     * @return
+     */
     public static String getSystemModel() {
-        if (AnyHelper.isNoNull(mobileType)) {
+        if (!Preconditions.isNullOrEmpty(mobileType)) {
             return mobileType;
         }
         mobileType = android.os.Build.MODEL;
-        //防止出现手机型号出现+号，导致后台验签失败的问题，前端处理去掉+号
-        if (mobileType.contains("+")) {
-            mobileType = mobileType.replace("+", "");
-        }
+        /*
+            下面代码可以防止在某些型号带"+"的字符串，在特定的加解密条件下，变成" "的情况
+            防止出现不必要的问题。
+         */
+        /**
+         if (mobileType.contains("+")) {
+         mobileType = mobileType.replace("+", "");
+         }
+         **/
         return mobileType;
     }
 
@@ -73,7 +86,7 @@ public class AppInfoUtil {
     public static String imeiId = "";
 
     public static String getDeviceId(Context context) {
-        if (AnyHelper.isNoNull(imeiId)) {
+        if (!Preconditions.isNullOrEmpty(imeiId)) {
             return imeiId;
         }
         TelephonyManager TelephonyMgr = (TelephonyManager) context.getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
@@ -89,7 +102,7 @@ public class AppInfoUtil {
     public static String macAddress = "";
 
     public static String getAdresseMAC(Context context) {
-        if (AnyHelper.isNoNull(macAddress)) {
+        if (!Preconditions.isNullOrEmpty(macAddress)) {
             return macAddress;
         }
         WifiManager wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -107,7 +120,7 @@ public class AppInfoUtil {
                     return macAddress;
                 }
             } catch (Exception e) {
-                AnyHelper.logInfo("MobileAcces", "Erreur lecture propriete Adresse MAC ");
+                L.cLog().e("Erreur lecture propriete Adresse MAC ");
             }
         } else {
             if (wifiInf != null && wifiInf.getMacAddress() != null) {
@@ -148,7 +161,7 @@ public class AppInfoUtil {
             }
 
         } catch (Exception e) {
-            AnyHelper.logInfo("MobileAcces", "Erreur lecture propriete Adresse MAC ");
+            L.cLog().e("Erreur lecture propriete Adresse MAC ");
         }
         return null;
     }
@@ -165,6 +178,7 @@ public class AppInfoUtil {
         int wifiState = wifiMan.getWifiState();
         String fileAddressMac = "/sys/class/net/wlan0/address";
 
+        //这会使APP自动去打开wifi开关，使用需注意
         wifiMan.setWifiEnabled(true);
         File fl = new File(fileAddressMac);
         FileInputStream fin = new FileInputStream(fl);
@@ -177,6 +191,8 @@ public class AppInfoUtil {
     }
 
     /**
+     * inputStream  -> String
+     *
      * @param crunchifyStream
      * @return
      * @throws IOException
@@ -201,18 +217,17 @@ public class AppInfoUtil {
         }
     }
 
+    //手机ip地址
+    public static String ipAddress = "";
+
     /**
-     * 获取手机IP地址
-     * TODO 备用作为基本参数
+     * 获取手机ip地址
      *
      * @param context
      * @return
      */
-
-    public static String ipAddress = "";
-
     public static String getIPAddress(Context context) {
-        if (AnyHelper.isNoNull(ipAddress)) {
+        if (!Preconditions.isNullOrEmpty(ipAddress)) {
             return ipAddress;
         }
         NetworkInfo info = ((ConnectivityManager) context
@@ -242,7 +257,8 @@ public class AppInfoUtil {
                 return ipAddress;
             }
         } else {
-            AnyHelper.showTips(context, "当前无网络连接,请在设置中打开网络");
+            ToastUtils.showTips(context, "当前无网络连接,请在设置中打开网络");
+
         }
         return "";
     }
@@ -278,20 +294,13 @@ public class AppInfoUtil {
         return version + "";
     }
 
-    public static String getAppkey() {
-        return "Aq7MUu";
-    }
-
-    public static String getAppsecret() {
-        return "bJ0ZQI";
-    }
+    public static String version;
 
     /**
      * 获取版本号VersionName
      */
     public static String getAppVersion(Context context) {
-        String version = AppSPUtils.getString(context, C.params.appversion, "");
-        if (AnyHelper.isNoNull(version)) {
+        if (!Preconditions.isNullOrEmpty(version)) {
             return version;
         }
         try {
@@ -303,13 +312,20 @@ public class AppInfoUtil {
             e.printStackTrace();
         }
         L.cLog().i("getAppVersion version:" + version);
-        AppSPUtils.saveString(context, C.params.appversion, version);
         return version;
     }
 
-    static String channel = null;
+    //渠道
+    public static String channel = null;
 
-    public static String getMarket(Context context) {// =========================这个不是要传整型吗
+    /**
+     * 获取相关渠道
+     *
+     * @param context
+     * @param defaultChannel
+     * @return
+     */
+    public static String getMarket(Context context, @NonNull String defaultChannel) {
         if (channel != null) {
             return channel;
         }
@@ -319,10 +335,10 @@ public class AppInfoUtil {
                             PackageManager.GET_META_DATA);
             channel = appInfo.metaData.getString("UMENG_CHANNEL");
             if (TextUtils.isEmpty(channel)) {
-                channel = "bosera";
+                channel = defaultChannel;
             }
         } catch (Exception e) {
-            channel = "bosera";
+            channel = defaultChannel;
             e.printStackTrace();
         }
         return channel;
