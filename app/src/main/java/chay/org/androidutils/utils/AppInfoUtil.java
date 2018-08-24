@@ -257,7 +257,7 @@ public class AppInfoUtil {
                 return ipAddress;
             }
         } else {
-            ToastUtils.showTips(context, "当前无网络连接,请在设置中打开网络");
+            ToastUtil.showTips(context, "当前无网络连接,请在设置中打开网络");
 
         }
         return "";

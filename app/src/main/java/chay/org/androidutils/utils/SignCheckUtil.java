@@ -23,18 +23,18 @@ import java.security.cert.X509Certificate;
  * keytool -list -v -keystore xxx.jks，获取到相关的sign信息
  */
 
-public class SignCheckUtils {
+public class SignCheckUtil {
 
-    private static SignCheckUtils instance;
+    private static SignCheckUtil instance;
 
-    private SignCheckUtils() {
+    private SignCheckUtil() {
     }
 
-    public static SignCheckUtils getInstance() {
+    public static SignCheckUtil getInstance() {
         if (instance == null) {
-            synchronized (SignCheckUtils.class) {
+            synchronized (SignCheckUtil.class) {
                 if (instance == null) {
-                    instance = new SignCheckUtils();
+                    instance = new SignCheckUtil();
                 }
             }
         }

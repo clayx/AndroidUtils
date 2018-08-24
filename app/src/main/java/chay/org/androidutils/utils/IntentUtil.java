@@ -13,11 +13,11 @@ import android.support.v4.app.FragmentActivity;
 /**
  * Created by Administrator on 2018/3/12 0012.
  * <p>
- * IntentUtils 实现检查等相关操作
+ * IntentUtil 实现检查等相关操作
  * </p>
  */
 
-public class IntentUtils {
+public class IntentUtil {
 
     /**
      * Activity隐式跳转要通过resolver检查，防止ActivityNotFoundException
@@ -106,14 +106,14 @@ public class IntentUtils {
             Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            IntentUtils.startAction(context, intent);
+            IntentUtil.startAction(context, intent);
         } catch (Exception e) {
             if (PatternUtil.isUrl(defaultLoadUrl)) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
                 Uri content_url = Uri.parse(defaultLoadUrl);
                 intent.setData(content_url);
-                IntentUtils.startAction(context, intent);
+                IntentUtil.startAction(context, intent);
             }
         }
     }
@@ -152,7 +152,7 @@ public class IntentUtils {
             localIntent.putExtra("com.android.settings.ApplicationPkgName", context.getPackageName());
         }
 
-        IntentUtils.startAction(context, localIntent);
+        IntentUtil.startAction(context, localIntent);
     }
 
 }

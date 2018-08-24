@@ -26,7 +26,7 @@ import java.util.zip.ZipOutputStream;
  * PS:如果该ZIP文件被劫持插入恶意代码，则禁止ZIP目录遍历
  * </p>
  */
-public class ZipUtils {
+public class ZipUtil {
     private static final int BUFF_SIZE = 1024 * 1024; // 1M Byte
 
     /**

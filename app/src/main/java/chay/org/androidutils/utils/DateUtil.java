@@ -14,7 +14,7 @@ import java.util.Date;
  * </p>
  */
 
-public class DateUtils {
+public class DateUtil {
 
     /**
      * 获取当前系统时间

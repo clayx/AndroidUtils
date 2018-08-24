@@ -13,7 +13,7 @@ import java.text.DecimalFormat;
  * Description: 字符串转数字，避免异常
  */
 
-public class NumberUtils {
+public class NumberUtil {
 
     /**
      * 字符串转化成double
