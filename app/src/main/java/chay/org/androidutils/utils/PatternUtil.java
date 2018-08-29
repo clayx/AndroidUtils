@@ -137,6 +137,22 @@ public class PatternUtil {
     }
 
     /**
+     * 检查字符是否包含中文，
+     * @param str
+     * @return
+     */
+    public static boolean isContainsChinese(String str)
+    {
+        Pattern pat = Pattern.compile("[\u4e00-\u9fa5]");
+        Matcher matcher = pat.matcher(str);
+        boolean flg = false;
+        if (matcher.find())    {
+            flg = true;
+        }
+        return flg;
+    }
+
+    /**
      * 检查字符是否符合15/18位身份证号
      *
      * @param idNum
