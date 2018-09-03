@@ -66,6 +66,7 @@ public class KeyStoreUtil {
             NoSuchAlgorithmException, InvalidAlgorithmParameterException {
         Calendar start = new GregorianCalendar();
         Calendar end = new GregorianCalendar();
+        //结束时间可根据自己项目中的.jks或者.keystore文件获取
         end.add(Calendar.YEAR, 1);
         AlgorithmParameterSpec spec;
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
@@ -93,8 +94,8 @@ public class KeyStoreUtil {
                 .getInstance(KeyStoreEntity.TYPE_RSA, KeyStoreEntity.KEYSTORE_PROVIDER_ANDROID_KEYSTORE);
         keyPairGenerator.initialize(spec);
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
-        Log.e(TAG, "public key is " + keyPair.getPublic().toString());
-        Log.e(TAG, "private key is " + keyPair.getPrivate().toString());
+        L.cLog().e("public key is " + keyPair.getPublic().toString());
+        L.cLog().e("private key is " + keyPair.getPrivate().toString());
     }
 
     public static String sign(String input, String alias) throws KeyStoreException,
@@ -111,14 +112,14 @@ public class KeyStoreUtil {
         }
         KeyStore.Entry entry = keyStore.getEntry(alias, null);
         if (entry == null) {
-            Log.e(TAG, "No key found under alias: " + alias);
-            Log.e(TAG, "Exiting signData()...");
+            L.cLog().e("No key found under alias: " + alias);
+            L.cLog().e( "Exiting signData()...");
             return "";
         }
 
         if (!(entry instanceof KeyStore.PrivateKeyEntry)) {
-            Log.e(TAG, "Not an instance of a PrivateKeyEntry");
-            Log.e(TAG, "Exiting signData()...");
+            L.cLog().e( "Not an instance of a PrivateKeyEntry");
+            L.cLog().e( "Exiting signData()...");
             return "";
         }
 
@@ -140,8 +141,8 @@ public class KeyStoreUtil {
         }
 
         if (TextUtils.isEmpty(signatureStr)) {
-            Log.e(TAG, "Invalid signature.");
-            Log.e(TAG, "Exiting verifyData()...");
+            L.cLog().e( "Invalid signature.");
+            L.cLog().e( "Exiting verifyData()...");
             return false;
         }
 
@@ -160,13 +161,13 @@ public class KeyStoreUtil {
 
         KeyStore.Entry entry = ks.getEntry(alias, null);
         if (entry == null) {
-            Log.w(TAG, "No key found under alias: " + alias);
-            Log.w(TAG, "Exiting verifyData()...");
+            L.cLog().w( "No key found under alias: " + alias);
+            L.cLog().w( "Exiting verifyData()...");
             return false;
         }
 
         if (!(entry instanceof KeyStore.PrivateKeyEntry)) {
-            Log.w(TAG, "Not an instance of a PrivateKeyEntry");
+            L.cLog().w( "Not an instance of a PrivateKeyEntry");
             return false;
         }
 
