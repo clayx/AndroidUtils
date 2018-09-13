@@ -7,10 +7,12 @@ import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 
+import chay.org.androidutils.BuildConfig;
 import chay.org.androidutils.application.ActivityLifecycleListener;
 
 /**
@@ -33,9 +35,29 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         binding = DataBindingUtil.setContentView(this, getLayoutId());
         //监听虚拟键的广播
         registerReceiver();
+        setStrictMode();
     }
 
     public abstract int getLayoutId();
+
+    /**
+     * 设置手机开发者模式时使用严苛模式，对影响自己主线程的耗时操作进行处理
+     */
+    private void setStrictMode() {
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                    .detectAll()//对任意阻塞主线程操作都察觉
+                    .penaltyDialog()//弹出违规提示窗
+                    .penaltyLog()//打印日志
+                    .build());
+
+            StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                    .detectAll()//对数据库cursor，Activity等可能内存泄露的监测
+                    .penaltyDeath()//关闭
+                    .penaltyLog()//打印日志
+                    .build());
+        }
+    }
 
     //注册广播
     private void registerReceiver() {
